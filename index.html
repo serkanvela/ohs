@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Optik Haberleşme Sistemleri &mdash; Arş. Gör. Dr. Serkan VELA</title>
+<meta name="description" content="Optik Haberleşme Sistemleri dersi: haftalık program, ders sunumları, MATLAB uygulamaları ve kaynaklar. Karadeniz Teknik Üniversitesi, Elektronik ve Haberleşme Mühendisliği Bölümü.">
+</head>
+<body>
+
+<!-- Bu dosya  web/sablon.html  dosyasindan URETILIR; elle duzenlemeyin.
+     Degisiklikleri sablon.html'de yapip  py -3 web/uret.py  calistirin. -->
+
+<style>
+.ohs{--mavi:#00426a;--turuncu:#e07a21;--gri:#5c6670;--acikgri:#eef1f4;
+     --yesil:#23845f;--cizgi:#d7dde3;
+     max-width:1000px;margin:0 auto;padding:0 20px 56px;
+     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
+                 "Helvetica Neue",Arial,sans-serif;
+     font-size:16px;line-height:1.6;color:#1d2328;
+     -webkit-font-smoothing:antialiased;box-sizing:border-box}
+.ohs *,.ohs *::before,.ohs *::after{box-sizing:inherit}
+
+.ohs .bas{border-bottom:3px solid var(--mavi);padding:22px 0 16px;margin-bottom:28px}
+.ohs h1{font-size:1.85rem;line-height:1.25;margin:0 0 10px;color:var(--mavi);
+        font-weight:700;letter-spacing:-.01em}
+.ohs .kunye{margin:0;color:var(--gri);font-size:.97rem}
+.ohs .kunye strong{color:#1d2328;font-weight:600}
+.ohs .kunye span{display:inline-block;margin-right:6px}
+
+.ohs h2{font-size:1.18rem;color:var(--mavi);margin:38px 0 12px;font-weight:700;
+        padding-bottom:6px;border-bottom:1px solid var(--cizgi)}
+.ohs h3{font-size:1rem;margin:20px 0 6px;font-weight:600}
+.ohs p{margin:0 0 12px}
+.ohs a{color:var(--mavi);text-decoration:underline;text-underline-offset:2px}
+.ohs a:hover{color:var(--turuncu)}
+
+/* --- hızlı erişim --- */
+.ohs .hizli{display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+            background:var(--acikgri);border-left:4px solid var(--turuncu);
+            padding:16px 18px;border-radius:0 4px 4px 0;margin-bottom:8px}
+.ohs .dugme{display:inline-block;background:var(--mavi);color:#fff;
+            text-decoration:none;font-weight:600;font-size:.95rem;
+            padding:11px 20px;border-radius:4px;white-space:nowrap}
+.ohs .dugme:hover{background:#005a90;color:#fff}
+.ohs .kod{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+          background:#fff;border:1px solid var(--cizgi);border-radius:3px;
+          padding:2px 7px;font-size:.92rem}
+.ohs .hizli p{margin:0;font-size:.93rem;color:var(--gri)}
+
+/* --- bilgi kartları --- */
+.ohs .kartlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+              gap:14px;margin:18px 0}
+.ohs .kart{border:1px solid var(--cizgi);border-radius:4px;padding:13px 15px}
+.ohs .kart dt{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;
+              color:var(--gri);font-weight:600;margin-bottom:3px}
+.ohs .kart dd{margin:0;font-size:.97rem;font-weight:600}
+
+/* --- tablo ---
+   Sitenin kendi CSS'i tablolara renk basabildigi icin arka plan ve yazi
+   rengi burada ACIKCA veriliyor; aksi halde okunmaz hale gelebiliyor. */
+.ohs .sarma{overflow-x:auto;margin:14px 0 6px}
+.ohs table{border-collapse:collapse;width:100%;font-size:.94rem;min-width:420px;
+           background:#fff;color:#1d2328}
+.ohs caption{text-align:left;color:var(--gri);background:none;font-size:.88rem;
+             padding-bottom:8px}
+.ohs th,.ohs td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--cizgi);
+                vertical-align:top;background:transparent;color:inherit}
+.ohs thead th{background:var(--mavi);color:#fff;font-weight:600;font-size:.88rem;
+              border-bottom:none;white-space:nowrap}
+.ohs tbody tr{background:#fff}
+.ohs tbody tr:nth-child(even){background:#f7f9fb}
+.ohs td.no{font-weight:700;color:var(--mavi);width:4.4rem;white-space:nowrap}
+.ohs tr.tatil td{background:#faf3ea;color:#7a4a10;font-style:italic}
+.ohs tr.tatil td.no{color:#7a4a10}
+.ohs td.ind{white-space:nowrap;width:1%}
+.ohs .blok{font-size:.8rem;color:var(--gri);display:block;margin-top:2px}
+
+/* --- kilit rozeti --- */
+.ohs .kilit{display:inline-block;font-size:.76rem;font-weight:600;
+            color:#7a4a10;background:#fdf1e3;border:1px solid #f0d3ae;
+            border-radius:3px;padding:1px 6px;margin-left:6px;white-space:nowrap}
+
+/* --- henuz yayimlanmamis hafta rozeti --- */
+.ohs .hazir{display:inline-block;font-size:.76rem;font-weight:600;
+            color:#5c6670;background:#eef1f4;border:1px solid #d4dae0;
+            border-radius:3px;padding:1px 6px;white-space:nowrap}
+
+/* --- uyarı kutusu --- */
+.ohs .uyari{background:#fdf7ef;border:1px solid #f0d3ae;border-radius:4px;
+            padding:14px 16px;margin:14px 0;font-size:.95rem}
+.ohs .uyari strong{color:#7a4a10}
+.ohs .not{background:var(--acikgri);border-radius:4px;padding:14px 16px;
+          margin:14px 0;font-size:.95rem}
+
+.ohs ul{margin:0 0 12px;padding-left:22px}
+.ohs li{margin-bottom:5px}
+.ohs .kitap{margin-bottom:14px}
+.ohs .kitap em{color:var(--gri)}
+
+.ohs .alt{margin-top:44px;padding-top:14px;border-top:1px solid var(--cizgi);
+          font-size:.86rem;color:var(--gri);display:flex;flex-wrap:wrap;
+          gap:6px 18px;justify-content:space-between}
+
+@media (max-width:560px){
+  .ohs{padding:0 14px 40px;font-size:15px}
+  .ohs h1{font-size:1.45rem}
+  .ohs .hizli{flex-direction:column;align-items:flex-start}
+  .ohs .dugme{width:100%;text-align:center}
+}
+@media print{
+  .ohs{max-width:none;padding:0}
+  .ohs .dugme{background:none;color:#000;border:1px solid #000}
+  .ohs thead th{background:none;color:#000;border-bottom:2px solid #000}
+}
+</style>
+
+<div class="ohs">
+
+  <header class="bas">
+    <p class="kunye">
+      <span><strong>Arş. Gör. Dr. Serkan VELA</strong></span> &middot;
+      <span>Elektronik ve Haberleşme Mühendisliği Bölümü</span> &middot;
+      <span>Karadeniz Teknik Üniversitesi</span><br>
+      <span>2026&ndash;2027 Güz Dönemi</span> &middot;
+      <span>Ders kodu: EHM&nbsp;4063</span> &middot;
+      <span>Ders günü: Perşembe</span> &middot;
+      <span>Ders saati: 2 saat</span>
+    </p>
+  </header>
+
+  <div class="hizli">
+    <a class="dugme" href="https://classroom.google.com/c/ODg1NjYyMDAxNzQ4?cjc=ntfeees"
+       target="_blank" rel="noopener">Google Classroom&rsquo;a git</a>
+    <p>Sınıfa katılım kodu: <span class="kod">ntfeees</span><br>
+       Duyurular, ödev teslimleri ve soru&ndash;cevap Classroom üzerinden
+       yürütülür.</p>
+  </div>
+
+  <h2>Ders hakkında</h2>
+  <p>
+    Bu ders optik haberleşmeyi <strong>bütün olarak</strong> ele alır: ışığın
+    bir bilgi taşıyıcısına dönüştürülmesinden başlayıp, aynı fizikle çalışan
+    iki büyük uygulama ailesini &mdash; <strong>fiber optik bağlantılar</strong>
+    ile <strong>kablosuz optik haberleşme (OWC/VLC)</strong> &mdash; ortak bir
+    çerçevede inceler.
+  </p>
+  <p>
+    İlk bölümde bütün optik sistemlerin ortak yapı taşları kurulur: ışık ölçümü,
+    optik kaynaklar (LED ve lazer diyot), optik algılayıcılar (PIN ve APD) ve
+    alıcıdaki gürültü. Ardından ışığın <em>kılavuzlanmış</em> ortamdaki yolculuğu
+    işlenir: fiberde tam iç yansıma, modlar, zayıflama, dispersiyon ve bağlantı
+    güç bütçesi. Dönemin son bölümünde ışık <em>serbest ortamda</em> yayılır:
+    oda içi kanal modeli, atmosferik kanal, modülasyon, denkleştirme, çoklu
+    erişim ve konumlama.
+  </p>
+  <p>
+    Her hafta kuramsal anlatım, kaynak kitaplardan alınmış şekiller, çözümlü
+    örnekler ve <strong>çalıştırılabilir MATLAB uygulamalarıyla</strong> desteklenir.
+    Sunumlardaki bütün sayısal sonuçlar ilgili MATLAB kodu çalıştırılarak
+    üretilmiş ve mümkün olan her yerde kaynak kitaplardaki değerlerle
+    karşılaştırılmıştır.
+  </p>
+
+  <dl class="kartlar">
+    <div class="kart"><dt>Kapsam</dt><dd>Fiber optik + kablosuz optik</dd></div>
+    <div class="kart"><dt>Uygulama</dt><dd>MATLAB (hazır kodlar)</dd></div>
+    <div class="kart"><dt>Sunum biçimi</dt><dd>Şifreli HTML</dd></div>
+    <div class="kart"><dt>Sunum dili</dt><dd>Türkçe</dd></div>
+  </dl>
+
+  <h2>Haftalık program</h2>
+  <div class="sarma">
+  <table>
+    <thead>
+      <tr><th scope="col">Tarih</th><th scope="col">Konu</th><th scope="col">Sunum</th></tr>
+    </thead>
+    <tbody>
+      <!-- Bağlantılar Google Drive dosya kimlikleriyle gömülmüştür.
+           Sunumu hazırlanmakta olan haftalarda bağlantı yoktur; konu
+           başlığı bilgi amacıyla listelenir, sunum hazır olunca eklenir. -->
+      <tr><td class="no">24 Eyl</td>
+          <td>Optik kablosuz haberleşmeye giriş ve VLC&rsquo;nin konumu
+              <span class="blok">Işığın haberleşmede kullanımı, IM/DD, optik bağlantı ailelerinin haritası</span></td>
+          <td class="ind"><a href="./H01.html" target="_blank" rel="noopener">HTML</a><span class="kilit">şifreli</span></td></tr>
+      <tr><td class="no">1 Eki</td>
+          <td>Radyometri, fotometri ve Lambert yayıcı
+              <span class="blok">Işık ölçüm birimleri, ışık şiddeti, aydınlık, yayılma örüntüsü</span></td>
+          <td class="ind"><a href="./H02.html" target="_blank" rel="noopener">HTML</a><span class="kilit">şifreli</span></td></tr>
+      <tr><td class="no">8 Eki</td>
+          <td>Optik kaynaklar: LED ve lazer diyot
+              <span class="blok">L&ndash;I eğrisi, modülasyon bant genişliği; uyarılmış ışıma, eşik akımı, DFB ve VCSEL</span></td>
+          <td class="ind"><a href="./H03.html" target="_blank" rel="noopener">HTML</a><span class="kilit">şifreli</span></td></tr>
+      <tr><td class="no">15 Eki</td>
+          <td>Optik algılayıcılar: PIN, APD ve gürültü
+              <span class="blok">Duyarlılık, çığ kazancı ve fazla gürültü, atış/termal gürültü, <em>Q</em> çarpanı ve BER</span></td>
+          <td class="ind"><a href="./H04.html" target="_blank" rel="noopener">HTML</a><span class="kilit">şifreli</span></td></tr>
+      <tr><td class="no">22 Eki</td>
+          <td>Optik fiber I: dalga kılavuzu, sayısal açıklık ve modlar
+              <span class="blok">Tam iç yansıma, kabul açısı ve NA, basamak/kademeli indis, LP modları, <em>V</em> sayısı, tek modlu fiber</span></td>
+          <td class="ind"><a href="./H05.html" target="_blank" rel="noopener">HTML</a><span class="kilit">şifreli</span></td></tr>
+      <tr class="tatil"><td class="no">29 Eki</td>
+          <td colspan="2">Cumhuriyet Bayramı &mdash; ders yapılmayacak</td></tr>
+      <tr><td class="no">5 Kas</td>
+          <td>Optik fiber II: zayıflama ve dispersiyon
+              <span class="blok">Soğurma, saçılma, eğilme kayıpları; kipler arası, malzeme ve dalga kılavuzu dispersiyonu, bant genişliği&ndash;mesafe çarpımı</span></td>
+          <td class="ind"><span class="hazir">hazırlanıyor</span></td></tr>
+      <tr><td class="no">12 Kas</td>
+          <td>Fiber bağlantı tasarımı: güç bütçesi, yükselteçler ve ağlar
+              <span class="blok">Ekleme ve konnektör kayıpları, güç ve zamanlama bütçesi, EDFA, WDM, PON; ara sınav bilgilendirmesi</span></td>
+          <td class="ind"><span class="hazir">hazırlanıyor</span></td></tr>
+      <tr class="tatil"><td class="no">19 Kas</td>
+          <td colspan="2">Ara sınav haftası &mdash; ders yapılmayacak</td></tr>
+      <tr><td class="no">26 Kas</td>
+          <td>Kablosuz optik kanal I: doğrudan görüş ve kapsama haritası
+              <span class="blok">Lambert modeli, kanal DC kazancı, görüş alanı, kapsama</span></td>
+          <td class="ind"><a href="./H08.html" target="_blank" rel="noopener">HTML</a><span class="kilit">şifreli</span></td></tr>
+      <tr><td class="no">3 Ara</td>
+          <td>Kablosuz optik kanal II: yansımalar, gecikme yayılımı ve ISI
+              <span class="blok">Darbe yanıtı, RMS gecikme yayılımı, semboller arası girişim, hız sınırı</span></td>
+          <td class="ind"><span class="hazir">hazırlanıyor</span></td></tr>
+      <tr><td class="no">10 Ara</td>
+          <td>Atmosferik kanal ve serbest uzay optiği (FSO)
+              <span class="blok">Sis ve yağmur zayıflaması, türbülans ve sintilasyon, ortam ışığı girişimi, bağlantı kullanılabilirliği</span></td>
+          <td class="ind"><span class="hazir">hazırlanıyor</span></td></tr>
+      <tr><td class="no">17 Ara</td>
+          <td>Modülasyon; titreşim, karartma, RLL kodlar ve IEEE 802.15.7
+              <span class="blok">OOK, PPM, PWM ve güç&ndash;bant ödünleşimi; Manchester, 4B6B, 8B10B, VPPM ve CSK</span></td>
+          <td class="ind"><span class="hazir">hazırlanıyor</span></td></tr>
+      <tr><td class="no">24 Ara</td>
+          <td>Optik OFDM, CAP ve denkleştirme
+              <span class="blok">DCO/ACO/Flip-OFDM, Hermitsel simetri ve çevrimsel önek; m-CAP; ZFE, MMSE ve DFE</span></td>
+          <td class="ind"><span class="hazir">hazırlanıyor</span></td></tr>
+      <tr><td class="no">31 Ara</td>
+          <td>MIMO, çoklu erişim ve konumlama; sualtı ve uzay bağlantıları
+              <span class="blok">Kanal matrisi ve koşul sayısı; OFDMA, CDMA, SDMA, NOMA; VLP üçgenlemesi; sualtı optiği ve derin uzay bağlantıları</span></td>
+          <td class="ind"><span class="hazir">hazırlanıyor</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="not">
+    <p>Ders <strong>Perşembe</strong> günleri yapılır.
+       <strong>29 Ekim 2026</strong> Cumhuriyet Bayramı&rsquo;na,
+       <strong>19 Kasım 2026</strong> ise ara sınav haftasına denk geldiği için
+       dönem boyunca <strong>13 ders</strong> işlenir. Her ders
+       <strong>45 dk + 15 dk ara + 45 dk</strong> düzenindedir.</p>
+    <p style="margin-bottom:0"><strong>&ldquo;Hazırlanıyor&rdquo;</strong> yazan
+       haftaların konu başlıkları kesinleşmiştir; sunum dosyaları hazırlandıkça
+       bu tabloya bağlantı olarak eklenecek ve Classroom&rsquo;dan duyurulacaktır.
+       Sunumlar ders sırasına göre değil, hazır olma sırasına göre yayımlanır;
+       bu nedenle ileri bir haftanın sunumu daha erken görünebilir.</p>
+  </div>
+
+  <h2>Ödevler</h2>
+  <p>Dönem boyunca <strong>dört ödev</strong> verilir. Ödevler dersin akışını
+     izler: önce ışığı üreten ve algılayan uçları, sonra ışığı <em>fiberde</em>
+     taşıyan bağlantıyı, ardından ışığın <em>serbest ortamda</em> yayıldığı
+     odayı, en sonunda da bu kanallar üzerinde çalışan modülasyonu
+     hesaplarsınız. Dönem sonunda elinizde <strong>uçtan uca hesaplanmış bir
+     fiber ve bir kablosuz optik bağlantı</strong> olur.</p>
+  <div class="sarma">
+  <table>
+    <thead>
+      <tr><th scope="col">Ödev</th><th scope="col">Verilir</th>
+          <th scope="col">Teslim</th><th scope="col">İçerik</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="no">1</td><td class="ind">15 Eki</td><td class="ind">5 Kas</td>
+          <td>Optik kaynak ve algılayıcı: LED&rsquo;in modülasyon bandı ve lazerin
+              eşik akımı; PIN ile APD&rsquo;nin karşılaştırılması, atış ve termal
+              gürültü, optimum çığ kazancı, SNR ve BER
+              <span class="blok">Dayandığı dersler: 8 Ekim, 15 Ekim</span></td></tr>
+      <tr><td class="no">2</td><td class="ind">12 Kas</td><td class="ind">3 Ara</td>
+          <td>Fiber bağlantı tasarımı: sayısal açıklık ve mod sayısı; zayıflama
+              ile dispersiyonun bant genişliği&ndash;mesafe çarpımına etkisi;
+              güç ve zamanlama bütçesi
+              <span class="blok">Dayandığı dersler: 22 Ekim, 5 Kasım, 12 Kasım</span></td></tr>
+      <tr><td class="no">3</td><td class="ind">26 Kas</td><td class="ind">17 Ara</td>
+          <td>Kablosuz optik kanal: armatür ızgarası, ortalama aydınlık ve
+              düzgünlük; aynı ızgaranın DC kanal kazancı haritası ve tam kapsama
+              için gereken en dar görüş alanı
+              <span class="blok">Dayandığı dersler: 1 Ekim, 26 Kasım, 3 Aralık</span></td></tr>
+      <tr><td class="no">4</td><td class="ind">17 Ara</td><td class="ind">31 Ara</td>
+          <td>Modülasyon ve yüksek hız: OOK, <em>L</em>-PPM ve PWM&rsquo;in
+              güç&ndash;bant karşılaştırması; RLL kodlarının ek yükü ve karartma;
+              DCO/ACO-OFDM ile CAP ve denkleştirme
+              <span class="blok">Dayandığı dersler: 17 Aralık, 24 Aralık</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="uyari">
+    <p><strong>Ödevler bireyseldir</strong> ve <strong>Google Classroom</strong>
+       üzerinden teslim edilir. Her teslim tek bir sıkıştırılmış dosyadır:
+       <strong>PDF rapor</strong> (en çok 6 sayfa) ve
+       <strong>çalıştırılabilir <span class="kod">.m</span> dosyaları</strong>.</p>
+    <p style="margin-bottom:0">Raporda her sayısal sonucun <strong>hangi
+       denklemden</strong> geldiği ve hangi varsayımların yapıldığı açıkça
+       yazılmalıdır. Sayı tek başına yanıt değildir.</p>
+  </div>
+
+  <h3>Sayılar size özeldir</h3>
+  <p>Her ödevin sayısal girdileri <strong>öğrenci numaranızın son iki
+     hanesinden</strong> üretilir: çalışma dalga boyu, fotodiyot duyarlılığı,
+     fiberin indis farkı ve uzunluğu, oda boyutu, LED yarı güç açısı, hedef veri
+     hızı ve diğerleri. Kod arşivindeki
+     <span class="kod">odev_parametreleri.m</span> dosyasını kendi numaranızla
+     çalıştırıp parametrelerinizi alırsınız:</p>
+  <p><span class="kod">&gt;&gt; P = odev_parametreleri(201912345)</span></p>
+  <p>Her ödevde ayrıca, tasarım seçimi içermeyen ve <strong>tek doğru yanıtı
+     olan</strong> bir <strong>referans hesap</strong> vardır. Örneğin 2. ödevde:
+     verilen indis, yarıçap ve dalga boyu için sayısal açıklık <em>NA</em>,
+     normalize frekans <em>V</em> ve kesim dalga boyu; ardından kendi
+     bağlantınızın toplam kaybı ve alıcıya ulaşan optik güç. 3. ödevde ise
+     odanızın (<em>L</em>/4, 3<em>L</em>/4) &times; (<em>W</em>/4, 3<em>W</em>/4)
+     noktalarına yerleştirilmiş 2&times;2 armatür ızgarası için, 121&times;121
+     örnekli alıcı düzleminde ortalama aydınlık, en düşük aydınlık ve düzgünlük.
+     Bu sayıları raporunuzda <strong>4 anlamlı basamakla</strong> bildirirsiniz.</p>
+  <div class="uyari">
+    <p><strong>Yapay zekâ kullanımı.</strong> Yapay zekâ araçlarından öğrenmek
+       için yararlanabilirsiniz. Ancak teslim ettiğiniz <strong>kod sizin
+       çalıştırdığınız kod</strong>, bildirdiğiniz <strong>sayılar da o kodun
+       çıktısı</strong> olmalıdır. Kullandıysanız raporun sonunda nerede ve ne
+       için kullandığınızı bir cümleyle belirtin.</p>
+    <p style="margin-bottom:0">Bildirdiğiniz referans sayılar kendi
+       parametrelerinizle tutmuyorsa ödev değerlendirilmez. Bu derste hiçbir iki
+       öğrencinin referans sonuçları aynı değildir; dolayısıyla başkasının
+       sayıları da sizde tutmaz.</p>
+  </div>
+
+  <h2>Ders materyallerine erişim</h2>
+  <div class="uyari">
+    <p><strong>Sunumlar şifreli HTML dosyalarıdır.</strong> Her hafta tek bir
+       <span class="kod">.html</span> dosyası vardır; içindeki bütün metin,
+       şekil, denklem ve MATLAB çıktısı <strong>AES-256</strong> ile
+       şifrelenmiştir. <strong>Şifre Google Classroom üzerinden
+       duyurulur.</strong></p>
+    <p><strong>Nasıl açılır:</strong> tablodaki bağlantıya tıklayın; sunum
+       <strong>doğrudan tarayıcıda</strong> açılır ve şifre sorar. Şifreyi
+       yazdığınızda sunum görünür. İndirmeniz, program kurmanız ya da bir
+       hesaba girmeniz gerekmez.</p>
+    <p>Çözme işlemi <strong>sizin tarayıcınızda</strong> yapılır; şifre hiçbir
+       sunucuya gönderilmez. Sayfayı kaydederseniz
+       (<strong>Ctrl&nbsp;+&nbsp;S</strong>) dosya <strong>çevrimdışı</strong>
+       da aynı şekilde çalışır. Güncel Chrome, Edge, Firefox veya Safari
+       yeterlidir. Açıldıktan sonra <strong>&larr; &rarr;</strong> tuşlarıyla
+       gezinir, <strong>?</strong> ile kısayolları görür,
+       <strong>Ctrl&nbsp;+&nbsp;P</strong> ile PDF olarak yazdırabilirsiniz.</p>
+    <p style="margin-bottom:0">Materyaller ders içi kullanım içindir; şifreyi ve
+       dosyaları ders dışında paylaşmayınız. Sunumlardaki şekiller telif hakkı
+       korumalı kaynaklardan eğitim amaçlı alıntı kapsamında kullanılmıştır.</p>
+  </div>
+  <p>
+    <strong>MATLAB kodları.</strong> İşlenen haftaların kod dosyaları
+    (<span class="kod">.m</span>) ve ürettikleri figürler tek bir şifreli arşivde
+    toplanmıştır:
+    <a href="./OHS-matlab-kodlari.zip"
+       target="_blank" rel="noopener">OHS-matlab-kodlari.zip</a><span class="kilit">şifreli</span>
+    (0,7 MB). Bu bağlantı dosyayı <strong>indirir</strong>. Arşiv AES-256
+    şifrelidir; 7-Zip, WinRAR veya Keka ile açılır ve sunumlarla aynı şifreyi
+    kullanır. Yeni haftalar işlendikçe arşiv <strong>aynı bağlantı
+    üzerinden</strong> güncellenir; dosyayı yeniden indirmeniz yeterlidir.
+  </p>
+  <p>
+    Kodlar ek araç kutusu gerektirmez; temel MATLAB kurulumunda çalışır. Her kodun
+    başında ne yaptığı, hangi denklemi uyguladığı ve hangi kaynak bölümüne
+    dayandığı yazılıdır.
+  </p>
+
+  <p>
+    <strong>MATLAB lisansı.</strong> Üniversite öğrencilere ücretsiz MATLAB lisansı
+    sağlamaktadır. Kurulum, lisans ve erişim bilgisi için
+    <a href="https://www.ktu.edu.tr/bilgiislem/yazilim" target="_blank" rel="noopener">KTÜ
+    Bilgi İşlem Daire Başkanlığı &mdash; Yazılım sayfasına</a> bakınız.
+  </p>
+
+  <h2>Kaynaklar</h2>
+  <p>Ders sunumlarının tamamı aşağıdaki dört kitaba dayandırılmıştır. Her slaydın
+     alt köşesinde ilgili kitap, bölüm ve denklem/şekil numarası belirtilmiştir.</p>
+  <div class="kitap">
+    <strong>[A]</strong> Z. Ghassemlooy, W. Popoola, S. Rajbhandari,
+    <em>Optical Wireless Communications: System and Channel Modelling with MATLAB</em>,
+    2. baskı, CRC Press, 2019.
+  </div>
+  <div class="kitap">
+    <strong>[B]</strong> R. P. N. Vappangi, V. Venkata Mani, M. Sellathurai,
+    <em>Visible Light Communication: Comprehensive Theory and Applications with MATLAB</em>,
+    CRC Press, 2022.
+  </div>
+  <div class="kitap">
+    <strong>[C]</strong> J. M. Senior,
+    <em>Optical Fiber Communications: Principles and Practice</em>,
+    3. baskı, Pearson, 2009.
+  </div>
+  <div class="kitap">
+    <strong>[D]</strong> G. Keiser,
+    <em>Optical Fiber Communications</em>, 4. baskı, McGraw-Hill, 2011.
+  </div>
+  <p>Haftalık okuma listeleri ve önerilen ek makaleler her sunumun son slaydında
+     listelenmiştir.</p>
+
+  <h2>İletişim</h2>
+  <p>
+    <strong>Arş. Gör. Dr. Serkan VELA</strong><br>
+    Elektronik ve Haberleşme Mühendisliği Bölümü, Karadeniz Teknik Üniversitesi<br>
+    E-posta: <a href="mailto:serkanvela@ktu.edu.tr">serkanvela@ktu.edu.tr</a>
+  </p>
+  <p>Derse ilişkin soruları öncelikle <a href="https://classroom.google.com/c/ODg1NjYyMDAxNzQ4?cjc=ntfeees"
+     target="_blank" rel="noopener">Google Classroom</a> üzerinden iletiniz; böylece
+     yanıt bütün sınıfa ulaşır.</p>
+
+  <div class="alt">
+    <span>Optik Haberleşme Sistemleri &middot; 2026&ndash;2027 Güz Dönemi</span>
+    <span>Son güncelleme: 30 Eylül 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

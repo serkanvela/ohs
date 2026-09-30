@@ -1,0 +1,3 @@
+# Ders materyalleri arama motorlarina girmesin.
+User-agent: *
+Disallow: /
