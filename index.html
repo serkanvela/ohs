@@ -48,6 +48,7 @@
           background:#fff;border:1px solid var(--cizgi);border-radius:3px;
           padding:2px 7px;font-size:.92rem}
 .ohs .hizli p{margin:0;font-size:.93rem;color:var(--gri)}
+.ohs .oyun-baglanti{flex-basis:100%;display:flex;flex-wrap:wrap;gap:12px}
 
 /* --- bilgi kartları --- */
 .ohs .kartlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -108,6 +109,7 @@
   .ohs h1{font-size:1.45rem}
   .ohs .hizli{flex-direction:column;align-items:flex-start}
   .ohs .dugme{width:100%;text-align:center}
+  .ohs .oyun-baglanti{flex-basis:auto;align-self:stretch}
 }
 @media print{
   .ohs{max-width:none;padding:0}
@@ -136,6 +138,12 @@
     <p>Sınıfa katılım kodu: <span class="kod">ntfeeesu</span><br>
        Duyurular, ödev teslimleri ve soru&ndash;cevap Classroom üzerinden
        yürütülür.</p>
+    <div class="oyun-baglanti">
+      <a class="dugme" href="https://ohs.serkanvela2.workers.dev/siralama"
+         target="_blank" rel="noopener">Canlı sıralama</a>
+      <a class="dugme" href="https://ohs.serkanvela2.workers.dev/sorular"
+         target="_blank" rel="noopener">Eski sorular</a>
+    </div>
   </div>
 
   <h2>Ders hakkında</h2>
